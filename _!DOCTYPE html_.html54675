@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-group input[type="submit"] {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        .form-group input[type="radio"], 
+        .form-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .form-group .error {
+            color: #dc3545;
+            font-size: 0.875em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro Completo</h1>
+        <form action="cadastrar.php" method="post">
+            <div class="form-group">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required>
+                <div class="error" id="nome-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error" id="email-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required minlength="6">
+                <div class="error" id="senha-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="confirmar-senha">Confirmar Senha:</label>
+                <input type="password" id="confirmar-senha" name="confirmar-senha" required>
+                <div class="error" id="confirmar-senha-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" pattern="\(\d{2}\) \d{4,5}-\d{4}" placeholder="(11) 12345-6789">
+                <div class="error" id="telefone-error"></div>
+            </div>
+            <div class="form-group">
+                <label>Gênero:</label>
+                <input type="radio" id="masculino" name="genero" value="masculino">
+                <label for="masculino">Masculino</label>
+                <input type="radio" id="feminino" name="genero" value="feminino">
+                <label for="feminino">Feminino</label>
+                <input type="radio" id="outro" name="genero" value="outro">
+                <label for="outro">Outro</label>
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <select id="estado" name="estado" required>
+                    <option value="" disabled selected>Selecione seu estado</option>
+                    <option value="ac">Acre</option>
+                    <option value="al">Alagoas</option>
+                    <option value="ap">Amapá</option>
+                    <option value="am">Amazonas</option>
+                    <option value="ba">Bahia</option>
+                    <option value="ce">Ceará</option>
+                    <option value="df">Distrito Federal</option>
+                    <option value="es">Espírito Santo</option>
+                    <option value="go">Goiás</option>
+                    <option value="ma">Maranhão</option>
+                    <option value="mt">Mato Grosso</option>
+                    <option value="ms">Mato Grosso do Sul</option>
+                    <option value="mg">Minas Gerais</option>
+                    <option value="pa">Pará</option>
+                    <option value="pb">Paraíba</option>
+                    <option value="pr">Paraná</option>
+                    <option value="pe">Pernambuco</option>
+                    <option value="pi">Piauí</option>
+                    <option value="rj">Rio de Janeiro</option>
+                    <option value="rn">Rio Grande do Norte</option>
+                    <option value="rs">Rio Grande do Sul</option>
+                    <option value="ro">Rondônia</option>
+                    <option value="rr">Roraima</option>
+                    <option value="sc">Santa Catarina</option>
+                    <option value="sp">São Paulo</option>
+                    <option value="se">Sergipe</option>
+                    <option value="to">Tocantins</option>
+                </select>
+                <div class="error" id="estado-error"></div>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="aceito" name="aceito" required>
+                <label for="aceito">Eu aceito os <a href="#">termos e condições</a></label>
+                <div class="error" id="aceito-error"></div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            let valid = true;
+
+            // Validar Nome
+            const nome = document.getElementById('nome');
+            const nomeError = document.getElementById('nome-error');
+            if (nome.value.trim() === '') {
+                nomeError.textContent = 'O nome é obrigatório.';
+                valid = false;
+            } else {
+                nomeError.textContent = '';
+            }
+
+            // Validar Email
+            const email = document.getElementById('email');
+            const emailError = document.getElementById('email-error');
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email.value)) {
+                emailError.textContent = 'Email inválido.';
+                valid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            // Validar Senha
+            const senha = document.getElementById('senha');
+            const senhaError = document.getElementById('senha-error');
+            if (senha.value.length < 6) {
+                senhaError.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+                valid = false;
+            } else {
+                senhaError.textContent = '';
+            }
+
+            // Validar Confirmação de Senha
+            const confirmarSenha = document.getElementById('confirmar-senha');
+            const confirmarSenhaError = document.getElementById('confirmar-senha-error');
+            if (senha.value !== confirmarSenha.value) {
+                confirmarSenhaError.textContent = 'As senhas não coincidem.';
+                valid = false;
+            } else {
+                confirmarSenhaError.textContent = '';
+            }
+
+            // Validar Telefone
+            const telefone = document.getElementById('telefone');
+            const telefoneError = document.getElementById('telefone-error');
+            if (telefone.value && !telefone.checkValidity()) {
+                telefoneError.textContent = 'Número de telefone inválido.';
+                valid = false;
+            } else {
+                telefoneError.textContent = '';
+            }
+
+            // Validar Estado
+            const estado = document.getElementById('estado');
+            const estadoError = document.getElementById('estado-error');
+            if (estado.value === '') {
+                estadoError.textContent = 'Selecione um estado.';
+                valid = false;
+            } else {
+                estadoError.textContent = '';
+            }
+
+            // Validar Aceito Termos
+            const aceito = document.getElementById('aceito');
+            const aceitoError = document.get

@@ -1,0 +1,35 @@
+form {
+ width: 350px;
+ margin: 20px auto;
+ padding: 15px;
+ border: 1px solid #ddd;
+}
+ fieldset {
+ border: 1px dashed #aaa;
+ margin-bottom: 15px;
+ padding: 10px;
+ }
+ legend {
+    font-weight: bold;
+    color: #333;
+ }
+  label{
+    display: block;
+    margin-bottom: 5px;
+  }
+  textarea {
+    display: block;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+  }
+   .submit {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+   }
+  
